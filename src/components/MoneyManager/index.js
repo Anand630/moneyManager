@@ -19,10 +19,11 @@ export default class MoneyManager extends Component {
   state = {
     titleInput: '',
     amountInput: '',
-    typeId: 'Income',
+    typeId: 'INCOME',
     income: 0,
     expenses: 0,
-    balance: 0,
+    isError: false,
+    areFieldsEmpty: false,
     transactionsList: [],
   }
 
@@ -34,14 +35,7 @@ export default class MoneyManager extends Component {
 
   addTransactionItem = e => {
     e.preventDefault()
-    const {
-      titleInput,
-      amountInput,
-      typeId,
-      income,
-      expenses,
-      balance,
-    } = this.state
+    const {titleInput, amountInput, typeId, income, expenses} = this.state
 
     const newTransaction = {
       id: uuidv4(),
@@ -51,38 +45,54 @@ export default class MoneyManager extends Component {
     }
     console.log(`Income: ${income}`)
     console.log(`Expenses: ${expenses}`)
-    console.log(`Difference: ${income - expenses}`)
+    console.log(`Difference/Balance: ${income - expenses}`)
 
-    if (typeId === 'INCOME' && amountInput > 0) {
+    if (
+      typeId === 'INCOME' &&
+      amountInput > 0 &&
+      amountInput !== '' &&
+      titleInput !== ''
+    ) {
       this.setState(prevState => ({
         transactionsList: [...prevState.transactionsList, newTransaction],
         income: prevState.income + amountInput,
         titleInput: '',
         amountInput: '',
-        balance: prevState.income + amountInput - expenses,
+        isError: false,
+        areFieldsEmpty: false,
+        // balance: prevState.income + amountInput - expenses,
       }))
-    } else if (typeId === 'EXPENSES' && balance >= amountInput) {
+    } else if (
+      typeId === 'EXPENSES' &&
+      income - expenses >= amountInput &&
+      amountInput !== '' &&
+      titleInput !== ''
+    ) {
       this.setState(prevState => ({
         transactionsList: [...prevState.transactionsList, newTransaction],
         expenses: prevState.expenses + amountInput,
         titleInput: '',
         amountInput: '',
-        balance: income - prevState.expenses - amountInput,
+        isError: false,
+        areFieldsEmpty: false,
+        // balance: income - prevState.expenses - amountInput,
       }))
-    } else {
-      this.setState({balance: balance - amountInput})
+    } else if (amountInput !== '' && titleInput !== '') {
+      this.setState(prevState => ({isError: !prevState.isError}))
+    } else if (amountInput === '' || titleInput === '') {
+      this.setState(prevState => ({areFieldsEmpty: !prevState.areFieldsEmpty}))
     }
   }
 
   deleteTransaction = (id, type, refund) => {
-    if (type === 'Expenses') {
+    if (type === 'EXPENSES') {
       this.setState(prevState => ({
         transactionsList: prevState.transactionsList.filter(
           eachTransaction => eachTransaction.id !== id,
         ),
         expenses: prevState.expenses - refund,
       }))
-    } else if (type === 'Income') {
+    } else if (type === 'INCOME') {
       this.setState(prevState => ({
         transactionsList: prevState.transactionsList.filter(
           eachTransaction => eachTransaction.id !== id,
@@ -98,10 +108,11 @@ export default class MoneyManager extends Component {
       amountInput,
       income,
       expenses,
+      isError,
+      areFieldsEmpty,
       transactionsList,
-      balance,
     } = this.state
-    console.log(balance)
+    console.log(this.state)
     return (
       <div className="home-container">
         <div className="money-manager-container">
@@ -147,7 +158,7 @@ export default class MoneyManager extends Component {
                   >
                     {transactionTypeOptions[0].displayText}
                   </option>
-                  <option value={transactionTypeOptions[0].optionId}>
+                  <option value={transactionTypeOptions[1].optionId}>
                     {transactionTypeOptions[1].displayText}
                   </option>
                 </select>
@@ -156,9 +167,19 @@ export default class MoneyManager extends Component {
                 <button type="submit" className="add-button">
                   Add
                 </button>
-                {balance < 0 || amountInput === 0 ? (
+                {areFieldsEmpty ? (
                   <p className="insufficient-funds-warning">
-                    *Insufficient funds/Invalid Salary Input
+                    *Empty Title/Amount Input
+                  </p>
+                ) : null}
+                {amountInput === 0 ? (
+                  <p className="insufficient-funds-warning">
+                    *Invalid Salary Input
+                  </p>
+                ) : null}
+                {isError ? (
+                  <p className="insufficient-funds-warning">
+                    *Insufficient funds
                   </p>
                 ) : null}
               </div>
