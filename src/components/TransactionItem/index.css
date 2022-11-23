@@ -1,1 +1,47 @@
-/* Write your CSS here */
+.transaction-column-data-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid #cbd5e1;
+  border-top: none;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.title-data {
+  font-size: 14px;
+  font-weight: 400;
+  font-family: Roboto;
+  color: #334155;
+  width: 31%;
+}
+
+.amount-data {
+  font-size: 14px;
+  font-weight: 400;
+  font-family: Roboto;
+  color: #334155;
+  width: 31%;
+}
+
+.type-data {
+  font-size: 14px;
+  font-weight: 400;
+  font-family: Roboto;
+  color: #334155;
+  width: 31%;
+}
+
+.delete-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-icon {
+  height: 18px;
+  width: 18px;
+}
