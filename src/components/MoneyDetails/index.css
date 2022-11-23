@@ -52,3 +52,18 @@
   font-size: 20px;
   font-weight: 500;
 }
+
+@media (max-width: 768px) {
+  .each-money-details-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    padding-left: 22px;
+    padding-right: 15px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+}

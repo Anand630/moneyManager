@@ -13,7 +13,7 @@ const MoneyDetails = props => {
         />
         <div className="heading-amount-type-amount-container">
           <p className="amount-type">Your Balance</p>
-          <h1 className="amount">Rs {income - expenses}</h1>
+          <p className="amount">Rs {income - expenses}</p>
         </div>
       </li>
       <li className="each-money-details-container your-income-styling">
@@ -24,7 +24,7 @@ const MoneyDetails = props => {
         />
         <div className="heading-amount-type-amount-container">
           <p className="amount-type">Your Income</p>
-          <h1 className="amount">Rs {income}</h1>
+          <p className="amount">Rs {income}</p>
         </div>
       </li>
       <li className="each-money-details-container your-expenses-styling">
@@ -35,7 +35,7 @@ const MoneyDetails = props => {
         />
         <div className="heading-amount-type-amount-container">
           <p className="amount-type">Your Expenses</p>
-          <h1 className="amount">Rs {expenses}</h1>
+          <p className="amount">Rs {expenses}</p>
         </div>
       </li>
     </>

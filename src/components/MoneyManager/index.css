@@ -118,11 +118,12 @@ select {
   border: none;
   border-radius: 6px;
   padding: 6px;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: 8px;
+  padding-right: 8px;
   font-family: Roboto;
   color: #ffffff;
   cursor: pointer;
+  outline: none;
 }
 
 .history-container {
@@ -189,4 +190,73 @@ select {
   font-family: Roboto;
   color: #475569;
   width: 31%;
+}
+
+.insufficient-funds-warning {
+  color: red;
+  font-size: 11px;
+  font-family: Roboto;
+  margin-left: 8px;
+}
+
+.add-button-and-warning-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .name-and-welcome-note-container {
+    background-image: url('https://assets.ccbp.in/frontend/react-js/money-manager/money-manager-bg.png');
+    background-size: cover;
+
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-radius: 15px;
+  }
+  .money-details-container {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+
+    padding-left: 0;
+    width: 100%;
+  }
+
+  .add-transaction-and-history-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .form {
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    min-height: 55vh;
+    width: 100%;
+    padding: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .history-container {
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    min-height: 55vh;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
 }
